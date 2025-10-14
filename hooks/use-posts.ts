@@ -5,6 +5,9 @@ interface Post {
   title: string;
   body: string;
   imageUrl: string;
+  userId: string;
+  username: string;
+  userAvatar: string | null;
   createdAt: string;
 }
 

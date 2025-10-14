@@ -3,8 +3,15 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { R2 } from "@/lib/r2";
 import { randomUUID } from "crypto";
+import { auth } from "@clerk/nextjs/server";
 
 export async function POST(request: Request) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const { filename, contentType } = await request.json();
 

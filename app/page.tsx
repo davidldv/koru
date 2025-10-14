@@ -7,14 +7,6 @@ import PostCard from "@/components/PostCard";
 import { SignedIn } from "@clerk/nextjs";
 import { usePosts } from "@/hooks/use-posts";
 
-interface Post {
-  id: string;
-  title: string;
-  body: string;
-  imageUrl: string;
-  createdAt: string;
-}
-
 export default function Home() {
   const { data: posts = [], isLoading, error } = usePosts();
 
@@ -103,8 +95,9 @@ export default function Home() {
             posts.map((post) => (
               <PostCard
                 key={post.id}
-                username="user" // TODO: Add user authentication
+                username={post.username}
                 timeAgo={new Date(post.createdAt).toLocaleDateString()}
+                userAvatar={post.userAvatar ?? undefined}
                 postImage={post.imageUrl}
                 title={post.title}
                 caption={post.body}
