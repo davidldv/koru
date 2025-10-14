@@ -12,7 +12,7 @@ interface PostCardProps {
 
 export default function PostCard({ username, timeAgo, userAvatar, postImage, caption, likes }: PostCardProps) {
   return (
-    <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden w-full transition-shadow duration-300 ease-in-out group">
+    <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden w-full transition-shadow duration-100 ease-in-out group">
       {/* Header */}
       <div className="p-4 flex items-center gap-3">
         <div className="w-12 h-12 rounded-full bg-teal-400 flex items-center justify-center text-white font-semibold text-sm">
