@@ -42,6 +42,7 @@
 ### Planned Features
 
 #### 📸 Photo Space
+
 - [ ] Photo upload with filters and editing
 - [ ] Albums and collections
 - [ ] Photo stories (24-hour expiring content)
@@ -50,6 +51,7 @@
 - [ ] Collaborative photo challenges
 
 #### 📰 News & Text Space
+
 - [ ] Article publishing with rich text editor
 - [ ] Long-form content support
 - [ ] Topic-based feeds
@@ -58,6 +60,7 @@
 - [ ] Communities by topics (Technology, Science, Arts, etc.)
 
 #### 📚 Books Space
+
 - [ ] Reading lists and book reviews
 - [ ] Virtual book clubs
 - [ ] Reading progress tracking
@@ -66,6 +69,7 @@
 - [ ] Genre-specific communities
 
 #### 🌟 Cross-Space Features
+
 - [ ] Unified profile across all spaces
 - [ ] Cross-space search and discovery
 - [ ] Personalized content feed
@@ -137,6 +141,7 @@ Koru
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **Framework**: [Next.js 15.5.4](https://nextjs.org/) with App Router
 - **Language**: [TypeScript 5.x](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
@@ -144,6 +149,7 @@ Koru
 - **Build Tool**: [Turbopack](https://turbo.build/pack)
 
 ### Backend & Infrastructure
+
 - **Runtime**: [Bun 1.3.0](https://bun.sh/)
 - **Authentication**: [Clerk](https://clerk.com/)
 - **Database**: [PostgreSQL](https://www.postgresql.org/)
@@ -151,6 +157,7 @@ Koru
 - **Deployment**: Vercel (recommended)
 
 ### Development Tools
+
 - **Package Manager**: Bun
 - **Version Control**: Git
 - **Code Quality**: ESLint, Prettier (configured)
@@ -162,6 +169,7 @@ Koru
 ### Prerequisites
 
 Before you begin, ensure you have the following installed:
+
 - **Node.js**: 18.x or higher
 - **Bun**: 1.3.0 or higher ([Install Bun](https://bun.sh/))
 - **Git**: Latest version
@@ -170,30 +178,34 @@ Before you begin, ensure you have the following installed:
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/davidldv/koru.git
    cd koru
    ```
 
 2. **Install dependencies**
+
    ```bash
    bun install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env.local
    ```
 
    Edit `.env.local` and add your configuration:
+
    ```env
    # Clerk Authentication
    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key
    CLERK_SECRET_KEY=your_secret_key
-   
+
    # Database
    DATABASE_URL=postgresql://user:password@localhost:5432/koru
-   
+
    # App Configuration
    NEXT_PUBLIC_APP_URL=http://localhost:3000
    ```
@@ -207,22 +219,24 @@ Before you begin, ensure you have the following installed:
      - Sign-up URL: `/sign-up`
      - After sign-in URL: `/`
      - After sign-up URL: `/`
-   
+
    See [CLERK_SETUP.md](./CLERK_SETUP.md) for detailed instructions.
 
 5. **Set up the database**
+
    ```bash
    # Generate Prisma Client
    bunx prisma generate
-   
+
    # Run migrations
    bunx prisma migrate dev
-   
+
    # (Optional) Seed the database
    bunx prisma db seed
    ```
 
 6. **Start the development server**
+
    ```bash
    bun run dev
    ```
@@ -329,6 +343,7 @@ bun run test:coverage    # Generate test coverage report
 ### Components
 
 All components follow a minimalist design philosophy:
+
 - Clean lines and generous whitespace
 - Subtle shadows and hover effects
 - Smooth transitions and animations
@@ -339,17 +354,20 @@ All components follow a minimalist design philosophy:
 ## 🔐 Security & Privacy
 
 ### Authentication
+
 - Multi-factor authentication via Clerk
 - Secure session management
 - OAuth support (Google, GitHub, etc.)
 
 ### Data Protection
+
 - End-to-end encryption for sensitive data
 - Regular security audits
 - GDPR compliance ready
 - Data export and deletion capabilities
 
 ### Content Moderation
+
 - Community guidelines enforcement
 - Reporting system for inappropriate content
 - AI-powered content filtering (future)
@@ -370,6 +388,7 @@ All components follow a minimalist design philosophy:
 ## 🗺️ Roadmap
 
 ### Phase 1: Foundation (Current)
+
 - [x] Project setup and architecture
 - [x] Authentication system with Clerk
 - [x] Basic Photo Space UI
@@ -378,6 +397,7 @@ All components follow a minimalist design philosophy:
 - [ ] API foundation
 
 ### Phase 2: Photo Space (Q1 2026)
+
 - [ ] Photo upload functionality
 - [ ] Image processing and optimization
 - [ ] Photo feed with infinite scroll
@@ -386,6 +406,7 @@ All components follow a minimalist design philosophy:
 - [ ] Photography communities
 
 ### Phase 3: News & Text Space (Q2 2026)
+
 - [ ] Rich text editor
 - [ ] Article publishing system
 - [ ] Topic-based organization
@@ -393,6 +414,7 @@ All components follow a minimalist design philosophy:
 - [ ] News communities
 
 ### Phase 4: Books Space (Q3 2026)
+
 - [ ] Book database integration
 - [ ] Review and rating system
 - [ ] Reading progress tracking
@@ -400,6 +422,7 @@ All components follow a minimalist design philosophy:
 - [ ] Book communities
 
 ### Phase 5: Advanced Features (Q4 2026)
+
 - [ ] Direct messaging
 - [ ] Notification system
 - [ ] Advanced search
@@ -460,9 +483,11 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 ## 👥 Team
 
 ### Creator & Lead Developer
+
 **David** - [@davidldv](https://github.com/davidldv)
 
 ### Contributors
+
 See the list of [contributors](https://github.com/davidldv/koru/contributors) who participated in this project.
 
 ---
