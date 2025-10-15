@@ -12,6 +12,21 @@ export const prisma =
       process.env.NODE_ENV === "development"
         ? ["query", "error", "warn"]
         : ["error"],
+    datasources: {
+      db: {
+        url: process.env.DATABASE_URL,
+      },
+    },
   });
 
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+
+// Disconnect on process termination
+if (process.env.NODE_ENV === "development") {
+  process.on("SIGTERM", async () => {
+    await prisma.$disconnect();
+  });
+  process.on("SIGINT", async () => {
+    await prisma.$disconnect();
+  });
+}

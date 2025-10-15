@@ -74,7 +74,7 @@ export default function Home() {
               </p>
               <SignedIn>
                 <Link href="/create-post">
-                  <button className="bg-teal-500 text-white px-8 py-3 rounded-full hover:bg-teal-600 transition-colors font-medium text-lg">
+                  <button className="bg-teal-500 cursor-pointer text-white px-8 py-3 rounded-full hover:bg-teal-600 transition-colors font-medium text-lg">
                     Share Your First Photo
                   </button>
                 </Link>
@@ -92,7 +92,7 @@ export default function Home() {
               </p>
             </div>
           ) : (
-            posts.map((post) => (
+            posts.map((post: any) => (
               <PostCard
                 key={post.id}
                 username={post.username}
