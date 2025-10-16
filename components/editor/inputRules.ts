@@ -15,7 +15,7 @@ function headingRule(level: number, schema: Schema) {
   return textblockTypeInputRule(
     new RegExp("^(#{1," + level + "})\\s$"),
     schema.nodes.heading,
-    () => ({ level })
+    () => ({ level }),
   );
 }
 
@@ -60,8 +60,8 @@ export function buildInputRules(schema: Schema) {
         schema.nodes.ordered_list,
         (match: string[]) => ({ order: +match[1] }),
         (match: string[], node: any) =>
-          node.childCount + node.attrs.order === +match[1]
-      )
+          node.childCount + node.attrs.order === +match[1],
+      ),
     );
   }
 
@@ -74,16 +74,16 @@ export function buildInputRules(schema: Schema) {
           state: EditorState,
           match: RegExpMatchArray,
           start: number,
-          end: number
+          end: number,
         ): Transaction | null => {
           const tr = state.tr.replaceWith(
             start - 1,
             end,
-            schema.nodes.horizontal_rule.create()
+            schema.nodes.horizontal_rule.create(),
           );
           return tr;
-        }
-      )
+        },
+      ),
     );
   }
 

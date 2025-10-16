@@ -127,7 +127,7 @@ export function Toolbar({ view }: ToolbarProps) {
         variant="ghost"
         size="sm"
         onClick={handleCommand(
-          setBlockType(schema.nodes.heading, { level: 1 })
+          setBlockType(schema.nodes.heading, { level: 1 }),
         )}
         className={`h-8 w-8 p-0 ${isBlockActive("heading", { level: 1 }) ? "bg-muted" : ""}`}
         title="Heading 1 (Cmd+Shift+1)"
@@ -139,7 +139,7 @@ export function Toolbar({ view }: ToolbarProps) {
         variant="ghost"
         size="sm"
         onClick={handleCommand(
-          setBlockType(schema.nodes.heading, { level: 2 })
+          setBlockType(schema.nodes.heading, { level: 2 }),
         )}
         className={`h-8 w-8 p-0 ${isBlockActive("heading", { level: 2 }) ? "bg-muted" : ""}`}
         title="Heading 2 (Cmd+Shift+2)"
@@ -151,7 +151,7 @@ export function Toolbar({ view }: ToolbarProps) {
         variant="ghost"
         size="sm"
         onClick={handleCommand(
-          setBlockType(schema.nodes.heading, { level: 3 })
+          setBlockType(schema.nodes.heading, { level: 3 }),
         )}
         className={`h-8 w-8 p-0 ${isBlockActive("heading", { level: 3 }) ? "bg-muted" : ""}`}
         title="Heading 3 (Cmd+Shift+3)"
@@ -200,7 +200,7 @@ export function Toolbar({ view }: ToolbarProps) {
         size="sm"
         onClick={() => {
           const tr = state.tr.replaceSelectionWith(
-            schema.nodes.horizontal_rule.create()
+            schema.nodes.horizontal_rule.create(),
           );
           dispatch(tr);
           view.focus();

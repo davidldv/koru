@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import PostCard from "@/components/PostCard";
 import { usePosts } from "@/hooks/use-posts";
 
@@ -51,17 +52,33 @@ export default function Home() {
 
           {/* Hero Content */}
           <div className="relative z-10 space-y-6 mb-16">
-            <h1 className="text-6xl md:text-7xl font-bold text-gray-900 tracking-tight">
+            <motion.h1
+              className="text-6xl md:text-7xl font-bold text-gray-900 tracking-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               Share Your Story
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
+            </motion.h1>
+            <motion.p
+              className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
               A minimalist space for creative expression through photography
-            </p>
-            <Link href="/create-post">
-              <button className="bg-teal-500 cursor-pointer text-white px-8 py-3 rounded-full hover:bg-teal-600 transition-colors font-medium text-lg">
-                Share Your First Photo
-              </button>
-            </Link>
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              <Link href="/create-post">
+                <button className="bg-teal-500 cursor-pointer text-white px-8 py-3 rounded-full hover:bg-teal-600 transition-colors font-medium text-lg">
+                  Share Your First Photo
+                </button>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -75,7 +92,7 @@ export default function Home() {
             </p>
           </div>
         ) : (
-          posts.map((post: any) => (
+          posts.map((post: any, index: number) => (
             <PostCard
               key={post.id}
               username={post.username}
@@ -85,6 +102,7 @@ export default function Home() {
               title={post.title}
               caption={post.body}
               likes={0} // TODO: Add likes functionality
+              index={index}
             />
           ))
         )}

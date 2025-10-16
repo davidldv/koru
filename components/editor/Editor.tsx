@@ -47,7 +47,7 @@ export const Editor = forwardRef<EditorHandle, EditorProps>(
       onViewReady,
       className = "",
     },
-    ref
+    ref,
   ) => {
     const editorRef = useRef<HTMLDivElement>(null);
     const viewRef = useRef<EditorView | null>(null);
@@ -130,7 +130,7 @@ export const Editor = forwardRef<EditorHandle, EditorProps>(
         <div ref={editorRef} />
       </div>
     );
-  }
+  },
 );
 
 Editor.displayName = "Editor";

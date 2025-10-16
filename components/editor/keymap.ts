@@ -65,7 +65,7 @@ export function buildKeymap(schema: Schema) {
   if (schema.nodes.horizontal_rule) {
     keys["Mod-_"] = (state: any, dispatch: any) => {
       dispatch(
-        state.tr.replaceSelectionWith(schema.nodes.horizontal_rule.create())
+        state.tr.replaceSelectionWith(schema.nodes.horizontal_rule.create()),
       );
       return true;
     };

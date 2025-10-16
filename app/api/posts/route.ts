@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     if (!title || !imageUrl) {
       return NextResponse.json(
         { error: "Missing required fields" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     console.error("Error creating post:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -67,7 +67,7 @@ export async function GET() {
             userAvatar: null,
           };
         }
-      })
+      }),
     );
 
     return NextResponse.json(postsWithUsers);
@@ -75,7 +75,7 @@ export async function GET() {
     console.error("Error fetching posts:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
