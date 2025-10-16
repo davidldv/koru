@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth, clerkClient } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
+import { fetchPosts } from "@/lib/queries";
 
 export async function POST(request: NextRequest) {
   const { userId } = await auth();
@@ -15,7 +16,7 @@ export async function POST(request: NextRequest) {
     if (!title || !imageUrl) {
       return NextResponse.json(
         { error: "Missing required fields" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -33,49 +34,20 @@ export async function POST(request: NextRequest) {
     console.error("Error creating post:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
 
 export async function GET() {
   try {
-    const posts = await prisma.post.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-
-    const postsWithUsers = await Promise.all(
-      posts.map(async (post) => {
-        try {
-          const client = await clerkClient();
-          const user = await client.users.getUser(post.userId);
-          return {
-            ...post,
-            username:
-              user.username ||
-              `${user.firstName || ""} ${user.lastName || ""}`.trim() ||
-              "User",
-            userAvatar: user.imageUrl,
-          };
-        } catch (error) {
-          // If user not found, use default
-          return {
-            ...post,
-            username: "User",
-            userAvatar: null,
-          };
-        }
-      }),
-    );
-
-    return NextResponse.json(postsWithUsers);
+    const posts = await fetchPosts();
+    return NextResponse.json(posts);
   } catch (error) {
     console.error("Error fetching posts:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

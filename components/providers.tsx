@@ -14,7 +14,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
             gcTime: 10 * 60 * 1000, // 10 minutes
           },
         },
-      }),
+      })
   );
 
   return (
