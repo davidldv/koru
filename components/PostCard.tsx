@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { Heart, MessageCircle, Send, Bookmark } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface PostCardProps {
   username: string;
@@ -98,10 +100,38 @@ export default function PostCard({
 
         {/* Caption */}
         {caption && (
-          <p className="text-sm">
+          <div className="text-sm prose prose-sm max-w-none">
             <span className="font-semibold">{username}</span>{" "}
-            <span className="text-gray-700">{caption}</span>
-          </p>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                p: ({ children }) => (
+                  <span className="text-gray-700">{children}</span>
+                ),
+                strong: ({ children }) => (
+                  <strong className="font-semibold">{children}</strong>
+                ),
+                em: ({ children }) => <em className="italic">{children}</em>,
+                code: ({ children }) => (
+                  <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs font-mono">
+                    {children}
+                  </code>
+                ),
+                a: ({ href, children }) => (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-teal-600 hover:underline"
+                  >
+                    {children}
+                  </a>
+                ),
+              }}
+            >
+              {caption}
+            </ReactMarkdown>
+          </div>
         )}
       </div>
     </div>

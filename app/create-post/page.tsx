@@ -1,17 +1,20 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useCreatePost } from "@/hooks/use-posts";
+import { Editor, Toolbar, EditorHandle } from "@/components/editor";
+import { EditorView } from "prosemirror-view";
 
 const CreatePost = () => {
   const router = useRouter();
   const createPost = useCreatePost();
+  const editorRef = useRef<EditorHandle>(null);
+  const [editorView, setEditorView] = useState<EditorView | null>(null);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -40,8 +43,11 @@ const CreatePost = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!title || !imageFile || !body) {
-      toast.error("Please fill in all fields");
+    // Get markdown content from editor
+    const markdown = editorRef.current?.getMarkdown() || "";
+
+    if (!title || !imageFile) {
+      toast.error("Please provide a title and image");
       return;
     }
 
@@ -88,7 +94,7 @@ const CreatePost = () => {
       // Create the post in the database
       await createPost.mutateAsync({
         title,
-        body,
+        body: markdown,
         imageUrl: publicUrl,
       });
 
@@ -187,13 +193,16 @@ const CreatePost = () => {
             >
               Caption
             </label>
-            <Textarea
-              id="body"
-              placeholder="Share your story..."
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-              className="min-h-[120px] text-base resize-none"
-            />
+            <div className="border border-border rounded-lg overflow-hidden bg-background">
+              <Toolbar view={editorView} />
+              <Editor
+                ref={editorRef}
+                placeholder="Share your story..."
+                onChange={setBody}
+                onViewReady={setEditorView}
+                className="min-h-[200px]"
+              />
+            </div>
           </div>
 
           {/* Submit Button */}
