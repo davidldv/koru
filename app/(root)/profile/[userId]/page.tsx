@@ -58,7 +58,7 @@ export default function ProfilePage() {
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               {profile.username}
             </h1>
-            
+
             {profile.firstName && (
               <p className="text-lg text-gray-600 mb-4">
                 {profile.firstName} {profile.lastName}
@@ -88,7 +88,7 @@ export default function ProfilePage() {
       {/* Posts Section */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Posts</h2>
-        
+
         {profile.posts.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
             <p className="text-gray-500 text-lg">No posts yet</p>

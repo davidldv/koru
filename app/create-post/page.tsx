@@ -1,17 +1,21 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Upload, X } from "lucide-react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useCreatePost } from "@/hooks/use-posts";
+import { Editor, Toolbar, EditorHandle } from "@/components/editor";
+import { EditorView } from "prosemirror-view";
 
 const CreatePost = () => {
   const router = useRouter();
   const createPost = useCreatePost();
+  const editorRef = useRef<EditorHandle>(null);
+  const [editorView, setEditorView] = useState<EditorView | null>(null);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -40,8 +44,11 @@ const CreatePost = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!title || !imageFile || !body) {
-      toast.error("Please fill in all fields");
+    // Get markdown content from editor
+    const markdown = editorRef.current?.getMarkdown() || "";
+
+    if (!title || !imageFile) {
+      toast.error("Please provide a title and image");
       return;
     }
 
@@ -88,7 +95,7 @@ const CreatePost = () => {
       // Create the post in the database
       await createPost.mutateAsync({
         title,
-        body,
+        body: markdown,
         imageUrl: publicUrl,
       });
 
@@ -104,21 +111,33 @@ const CreatePost = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl">
+      <motion.header
+        className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: [0.21, 1.02, 0.73, 1] }}
+      >
         <div className="container flex items-center justify-between h-16 px-4">
-          <button
-            onClick={() => router.push("/")}
-            className="flex items-center gap-2 text-foreground hover:text-primary transition-smooth"
+          <motion.div whileTap={{ scale: 0.95 }}>
+            <button
+              onClick={() => router.push("/")}
+              className="flex items-center gap-2 text-foreground hover:text-primary transition-smooth"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              <span className="font-medium">Back</span>
+            </button>
+          </motion.div>
+          <motion.h1
+            className="text-lg font-semibold bg-gradient-primary bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
           >
-            <ArrowLeft className="w-5 h-5" />
-            <span className="font-medium">Back</span>
-          </button>
-          <h1 className="text-lg font-semibold bg-gradient-primary bg-clip-text text-transparent">
             Create Post
-          </h1>
+          </motion.h1>
           <div className="w-20" /> {/* Spacer for centering */}
         </div>
-      </header>
+      </motion.header>
 
       <main className="container max-w-2xl mx-auto px-4 py-8">
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -151,13 +170,15 @@ const CreatePost = () => {
                   alt="Preview"
                   className="w-full h-auto object-cover"
                 />
-                <button
+                <motion.button
                   type="button"
                   onClick={removeImage}
                   className="absolute top-3 right-3 p-2 bg-background/90 rounded-full hover:bg-background transition-smooth"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <X className="w-5 h-5" />
-                </button>
+                </motion.button>
               </div>
             )}
           </div>
@@ -187,24 +208,29 @@ const CreatePost = () => {
             >
               Caption
             </label>
-            <Textarea
-              id="body"
-              placeholder="Share your story..."
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-              className="min-h-[120px] text-base resize-none"
-            />
+            <div className="border border-border rounded-lg overflow-hidden bg-background">
+              <Toolbar view={editorView} />
+              <Editor
+                ref={editorRef}
+                placeholder="Share your story..."
+                onChange={setBody}
+                onViewReady={setEditorView}
+                className="min-h-[200px]"
+              />
+            </div>
           </div>
 
           {/* Submit Button */}
-          <Button
-            type="submit"
-            size="lg"
-            className="w-full font-semibold"
-            disabled={uploading || createPost.isPending}
-          >
-            {uploading || createPost.isPending ? "Creating..." : "Share Post"}
-          </Button>
+          <motion.div whileTap={{ scale: 0.98 }}>
+            <Button
+              type="submit"
+              size="lg"
+              className="w-full font-semibold"
+              disabled={uploading || createPost.isPending}
+            >
+              {uploading || createPost.isPending ? "Creating..." : "Share Post"}
+            </Button>
+          </motion.div>
         </form>
 
         {error && <p className="mt-4 text-center text-red-500">{error}</p>}

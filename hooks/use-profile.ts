@@ -8,7 +8,7 @@ export function useProfile(userId: string | undefined) {
     fetcher,
     {
       revalidateOnFocus: false,
-    }
+    },
   );
 
   return {

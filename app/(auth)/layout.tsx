@@ -20,40 +20,74 @@ export default function AuthLayout({
               A minimalist space for creative expression through photography.
               Join our community and start sharing your moments.
             </p>
-            
+
             {/* Features */}
             <div className="space-y-4 pt-6">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
                   </svg>
                 </div>
-                <span className="text-gray-700 text-lg">Share photos with your community</span>
+                <span className="text-gray-700 text-lg">
+                  Share photos with your community
+                </span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
                   </svg>
                 </div>
-                <span className="text-gray-700 text-lg">Discover inspiring content</span>
+                <span className="text-gray-700 text-lg">
+                  Discover inspiring content
+                </span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
                   </svg>
                 </div>
-                <span className="text-gray-700 text-lg">Connect with like-minded creators</span>
+                <span className="text-gray-700 text-lg">
+                  Connect with like-minded creators
+                </span>
               </div>
             </div>
           </div>
 
           {/* Right Side - Auth Form */}
-          <div className="flex justify-center">
-            {children}
-          </div>
+          <div className="flex justify-center">{children}</div>
         </div>
       </div>
 

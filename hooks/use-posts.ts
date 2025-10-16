@@ -1,34 +1,5 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-
-interface Post {
-  id: string;
-  title: string;
-  body: string;
-  imageUrl: string;
-  userId: string;
-  username: string;
-  userAvatar: string | null;
-  createdAt: string;
-}
-
-interface CreatePostData {
-  title: string;
-  body: string;
-  imageUrl: string;
-}
-
-export function usePosts() {
-  return useQuery({
-    queryKey: ["posts"],
-    queryFn: async (): Promise<Post[]> => {
-      const res = await fetch("/api/posts");
-      if (!res.ok) {
-        throw new Error("Failed to fetch posts");
-      }
-      return res.json();
-    },
-  });
-}
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { type CreatePostData, type Post } from "@/lib/api";
 
 export function useCreatePost() {
   const queryClient = useQueryClient();
