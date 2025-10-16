@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { Search, Plus, Heart } from "lucide-react";
 
 export default function Header() {
@@ -45,16 +45,6 @@ export default function Header() {
               </button>
             </SignInButton>
           </SignedOut>
-
-          <SignedIn>
-            <UserButton
-              appearance={{
-                elements: {
-                  avatarBox: "w-10 h-10 cursor-pointer",
-                },
-              }}
-            />
-          </SignedIn>
         </nav>
       </div>
     </header>
